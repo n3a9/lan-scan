@@ -1,10 +1,12 @@
 # lan-scan
 
-A scanner that will use a starting address, or detect a local IP address, and probe all other IP address variations with the specified ports. It will then put all of the findings into a downloadable CSV.
+A scanner that will use a starting address, or detect a local IP address, and probe the specified ports of all other local IP addresses. It returns a downloadable CSV with all of the results.
 
 ## Usage
 
-Opening the website will automatically run the scan. A CSV should be downloadable within 10 seconds, which will contain the following format:
+Visit [http://n3a9.github.io/lan-scan](http://n3a9.github.io/lan-scan) in your browser to see a working demonstration.
+
+Opening the website will automatically run the scan. A CSV should be downloadable within 10 seconds, which will follow the following format:
 
 | Column 1   | Column 2 | Column 3      |
 | ---------- | -------- | ------------- |
@@ -16,10 +18,10 @@ Opening the website will automatically run the scan. A CSV should be downloadabl
 
 The following variables can be configured in [`userSettings.js`](https://github.com/n3a9/lan-scan/blob/master/js/userSettings.js):
 
-- `debug`: printing progress to browser console
+- `debug`: print progress and data to console
 - `address`: `default` if to be auto-detected, otherwise the starting local address
 - `ports`: a list of ports to probe
-- `timeout`: how long to timeout for each address probe in seconds
+- `timeout`: the timeout threshold for after sending a request for each address in seconds
 
 ### Anonymized IP
 
@@ -43,4 +45,6 @@ The auto detection for the local IP is based on [webrtc-ip](https://github.com/n
 
 ### Local Network Scanning
 
-Once the beginning address and ports are set, an asynchronous AJAX will be made to the port of every address. The callback will then determine whether the request timed out, or if there was an error. Unfortunately, it is not possible to determine the different errors from the request (such as 401 or 404).
+Once the beginning address and ports are set, the scanner will iterate through all IP address variations by changing the last octet, ranging from 0 to 255.
+
+For each address, an asynchronous AJAX will be made to each port . The callback will then determine whether the request timed out, or if there was an error, and append it to the CSV. Unfortunately, it is not possible to determine the different errors from the request (such as `401` or `404`).

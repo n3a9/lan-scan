@@ -16,6 +16,7 @@ scanLocal = async (address, ports) => {
 
   if (isAnonymized(address)) {
     if (debug) console.log("Address is anonymized!");
+    document.body.removeChild(document.getElementById("loading"));
     document.body.appendChild(anonMessage);
     return;
   }
@@ -23,6 +24,7 @@ scanLocal = async (address, ports) => {
   const index = address.lastIndexOf(".");
   if (index == -1) {
     if (debug) console.log("Bad address!");
+    document.body.removeChild(document.getElementById("loading"));
     document.body.appendChild(badAddressMessage);
     return;
   }
@@ -41,6 +43,7 @@ scanLocal = async (address, ports) => {
     const encodedUri = encodeURI(csv);
 
     csvDownload.href = encodedUri;
+    document.body.removeChild(document.getElementById("loading"));
     document.body.appendChild(csvDownload);
   }, 10000);
 };

@@ -8,10 +8,42 @@
 
     <meta name="author" content="Neeraj Aggarwal" />
     <meta name="description" content="Run a scan on a local network." />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        font-family: "Roboto", sans-serif;
+      }
+      body {
+        padding-left: 1.5em;
+        padding-top: 1em;
+      }
+      h4 {
+        text-decoration: underline;
+      }
+      ul {
+        list-style-type: none;
+      }
+      li {
+        font-size: 24px;
+        font-weight: bold;
+      }
+    </style>
   </head>
 
   <body>
-    <h1>lan scan</h1>
+    <h1>lan-scan</h1>
+    <p>
+      A website that scans your local network. Check out the code at
+      <a href="https://github.com/n3a9/lan-scan">Github</a>.
+    </p>
+
+    <h4>Results</h4>
+    <p id="loading">Currently running!</p>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/detectAddress.js"></script>
     <script type="text/javascript" src="js/lanScan.js"></script>
