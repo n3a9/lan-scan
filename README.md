@@ -6,13 +6,37 @@ A scanner that will use a starting address, or detect a local IP address, and pr
 
 Visit [http://n3a9.github.io/lan-scan](http://n3a9.github.io/lan-scan) in your browser to see a working demonstration.
 
-Opening the website will automatically run the scan. A CSV should be downloadable within 10 seconds, which will follow the following format:
+Opening the website will automatically run the scan. A CSV or JSON should be downloadable within 10 seconds, which will follow the following format:
+
+**CSV Format**
 
 | Column 1   | Column 2 | Column 3      |
 | ---------- | -------- | ------------- |
 | IP Address | success  | data (string) |
 | IP Address | error    | error code    |
 | IP Address | timeout  | error code    |
+
+**JSON Format**
+
+```json
+[
+  {
+    "address": "IP Address",
+    "response": "success",
+    "data": "data"
+  },
+  {
+    "address": "IP Address",
+    "response": "error",
+    "responseCode": "error code"
+  },
+  {
+    "address": "IP Address",
+    "response": "timeout",
+    "responseCode": "error code"
+  }
+]
+```
 
 ### Settings
 
@@ -22,6 +46,7 @@ The following variables can be configured in [`userSettings.js`](https://github.
 - `address`: `default` if to be auto-detected, otherwise the starting local address
 - `ports`: a list of ports to probe
 - `timeout`: the timeout threshold for after sending a request for each address in seconds
+- `exportType`: the file type of the export, either `csv` or `json`
 
 ### Anonymized IP
 

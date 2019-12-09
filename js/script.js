@@ -18,8 +18,11 @@ let badAddressMessage = document.createElement("p");
 badAddressMessage.textContent = "Bad IP address! Check your settings.";
 
 const today = new Date().toISOString().substring(0, 10);
-let csvDownload = document.createElement("a");
-csvDownload.textContent = "Download Scan Results";
-csvDownload.download = `scan-results-${today}.csv`;
+let downloadElement = document.createElement("a");
+downloadElement.textContent = "Download Scan Results";
+downloadElement.download =
+  exportType === "csv"
+    ? `scan-results-${today}.csv`
+    : `scan-results-${today}.json`;
 
 runScan();

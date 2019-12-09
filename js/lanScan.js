@@ -1,4 +1,6 @@
-const scanResults = [];
+let scanResults = [];
+let csv = "";
+let json = "";
 
 runScan = () => {
   if (address === "default") {
@@ -37,14 +39,21 @@ scanLocal = async (address, ports) => {
   setTimeout(function() {
     if (debug) console.log(scanResults);
 
-    const csv =
-      "data:text/csv;charset=utf-8," +
-      scanResults.map(e => e.join(",")).join("\n");
-    const encodedUri = encodeURI(csv);
+    if (exportType === "csv")
+      csv =
+        "data:text/csv;charset=utf-8," +
+        scanResults.map(e => e.join(",")).join("\n");
 
-    csvDownload.href = encodedUri;
+    if (exportType === "json")
+      json =
+        "data:application/json;charset=utf-8," +
+        encodeURIComponent(JSON.stringify(scanResults));
+
+    const encodedUri = exportType === "csv" ? encodeURI(csv) : json;
+
+    downloadElement.href = encodedUri;
     document.body.removeChild(document.getElementById("loading"));
-    document.body.appendChild(csvDownload);
+    document.body.appendChild(downloadElement);
   }, 10000);
 };
 
@@ -60,12 +69,26 @@ scanPort = (beginningAddress, index) => {
       success: function(data) {
         if (debug) console.log(`Recieved success on address ${newAddress}.`);
         if (debug) console.log(data);
-        scanResults.push([newAddress, "response", data.toString()]);
+        if (exportType === "csv")
+          scanResults.push([newAddress, "response", data.toString()]);
+        if (exportType === "json")
+          scanResults.push({
+            address: newAddress,
+            response: "response",
+            data: data
+          });
       },
       error: function(jqXHR, textStatus, errorThrown) {
         if (debug)
           console.log(`Recieved ${textStatus} on address ${newAddress}.`);
-        scanResults.push([newAddress, textStatus, jqXHR.status]);
+        if (exportType === "csv")
+          scanResults.push([newAddress, textStatus, jqXHR.status]);
+        if (exportType === "json")
+          scanResults.push({
+            address: newAddress,
+            response: textStatus,
+            responseCode: jqXHR.status
+          });
       },
       timeout: timeout * 1000
     });
