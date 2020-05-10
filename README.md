@@ -1,20 +1,12 @@
 # lan-scan
 
-A scanner that will use a starting address, or detect a local IP address, and probe the specified ports of all other local IP addresses. It returns a downloadable CSV with all of the results.
+A website that will detect a local IP address and run a local network scan. It returns a downloadable JSON with the results.
 
 ## Usage
 
-Visit [http://n3a9.github.io/lan-scan](http://n3a9.github.io/lan-scan) in your browser to see a working demonstration.
+Visit [https://lan.neerajaggarwal.com](https://lan.neerajaggarwal.com) in your browser to see a working demonstration.
 
-Opening the website will automatically run the scan. A CSV or JSON should be downloadable within 10 seconds, which will follow the following format:
-
-**CSV Format**
-
-| Column 1   | Column 2 | Column 3      |
-| ---------- | -------- | ------------- |
-| IP Address | success  | data (string) |
-| IP Address | error    | error code    |
-| IP Address | timeout  | error code    |
+Opening the website will automatically run the scan. A JSON should be downloadable within 10 seconds, which will contain all the successful responses.
 
 **JSON Format**
 
@@ -24,29 +16,9 @@ Opening the website will automatically run the scan. A CSV or JSON should be dow
     "address": "IP Address",
     "response": "success",
     "data": "data"
-  },
-  {
-    "address": "IP Address",
-    "response": "error",
-    "responseCode": "error code"
-  },
-  {
-    "address": "IP Address",
-    "response": "timeout",
-    "responseCode": "error code"
   }
 ]
 ```
-
-### Settings
-
-The following variables can be configured in [`userSettings.js`](https://github.com/n3a9/lan-scan/blob/master/js/userSettings.js):
-
-- `debug`: print progress and data to console
-- `address`: `default` if to be auto-detected, otherwise the starting local address
-- `ports`: a list of ports to probe
-- `timeout`: the timeout threshold for after sending a request for each address in seconds
-- `exportType`: the file type of the export, either `csv` or `json`
 
 ### Anonymized IP
 
@@ -72,4 +44,4 @@ The auto detection for the local IP is based on [webrtc-ip](https://github.com/n
 
 Once the beginning address and ports are set, the scanner will iterate through all IP address variations by changing the last octet, ranging from 0 to 255.
 
-For each address, an asynchronous AJAX will be made to each port . The callback will then determine whether the request timed out, or if there was an error, and append it to the CSV. Unfortunately, it is not possible to determine the different errors from the request (such as `401` or `404`).
+For each address, an asynchronous AJAX will be made to each port . The callback will then determine whether the request timed out, or if there was an error, and append it to the CSV. Unfortunately, it is not possible to determine the different errors from the request (such as `401` or `404`) due to security enforcements from the browser.

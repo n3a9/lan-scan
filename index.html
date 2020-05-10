@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>lan-scan | n3a9</title>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <title>lan-scan</title>
 
-    <meta name="author" content="Neeraj Aggarwal" />
-    <meta name="description" content="Run a scan on a local network." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Neeraj Aggarwal" />
+  <meta name="description" content="Run a scan on a local network." />
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      html {
-        font-family: "Roboto", sans-serif;
-      }
-      body {
-        padding-left: 1.5em;
-        padding-top: 1em;
-      }
-      h4 {
-        text-decoration: underline;
-      }
-      ul {
-        list-style-type: none;
-      }
-      li {
-        font-size: 24px;
-        font-weight: bold;
-      }
-    </style>
-  </head>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
-  <body>
-    <h1>lan-scan</h1>
-    <p>
-      A website that scans your local network. Check out the code at
-      <a href="https://github.com/n3a9/lan-scan">Github</a>.
-    </p>
+  <style>
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      margin: 0 auto;
+      max-width: 550px;
+      padding: 0 2em;
+      line-height: 1.6;
+    }
 
-    <h4>Results</h4>
-    <p id="loading">Currently running!</p>
+    h3,
+    a {
+      color: #3a7ee4;
+      text-decoration: underline;
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/detectAddress.js"></script>
-    <script type="text/javascript" src="js/lanScan.js"></script>
-    <script type="text/javascript" src="js/userSettings.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-  </body>
+    li {
+      list-style: none;
+    }
+
+    p {
+      color: #6b6b6b;
+    }
+
+    em {
+      color: #c91212;
+      font-style: normal;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>lan-scan</h1>
+  <p>A website that will detect your local IP address and run a local network scan. Check out the code at <a
+      href="https://github.com/n3a9/lan-scan">Github</a>.</p>
+
+  <h3>Results</h3>
+  <p id="loading">Currently running!</p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/detectAddress.js"></script>
+  <script type="text/javascript" src="js/lanScan.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+</body>
+
 </html>
